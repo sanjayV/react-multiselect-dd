@@ -74,7 +74,7 @@ body {
   padding: 10px 12px;
 
   cursor: pointer;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   box-sizing: border-box;
 }
 
@@ -91,7 +91,7 @@ body {
   float: right;
 }
 
-.dropdown-list {
+/* .dropdown-list {
   float: left;
   width: 100%;
 
@@ -99,7 +99,7 @@ body {
   border-top: none;
   box-sizing: border-box;
   padding: 10px 12px;
-}
+} */
 
 .dropdown-list input[type="search"] {
   padding: 5px 0;
@@ -127,7 +127,7 @@ body {
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 12px;
+  /* font-size: 12px; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -215,6 +215,6 @@ body {
   list-style: none;
 }
 
-.container p {
+/* .container p {
   font-size: 12px;
-}
+} */

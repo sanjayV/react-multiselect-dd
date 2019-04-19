@@ -4,6 +4,7 @@ import _ from "lodash";
 import TagInput from "./TagInput";
 import { createTree } from "./createTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";
+import { style } from "./style";
 
 class Multiselect extends React.Component {
     state = {
@@ -61,20 +62,13 @@ class Multiselect extends React.Component {
     render() {
         const { search, selectedState } = this.state;
         const { data } = this.props;
-
-        const dropDownItems = createTree(
-            data,
-            search,
-            selectedState,
-            this.onChange
-        );
         return (
             <React.Fragment>
                 <div className="instructions">
                     (Click to expand and select states to filter)
-        </div>
-                <div className="dropdown-container">
-                    <div
+                </div>
+                <div className="dropdown-container" style={style.dropdownContainer}>
+                    <div style={style.dropdownSelected}
                         className="dropdown-button noselect"
                         onClick={() =>
                             this.setState(({ isDropdownOpen }) => {
@@ -98,7 +92,12 @@ class Multiselect extends React.Component {
                             this.state.isDropdownOpen ? "show" : "hide"
                             }`}
                     >
-                        {dropDownItems}
+                        {createTree(
+                            data,
+                            search,
+                            selectedState,
+                            this.onChange
+                        )}
                     </div>
                 </div>
             </React.Fragment>

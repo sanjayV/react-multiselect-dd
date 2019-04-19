@@ -1,5 +1,6 @@
 import React from "react";
 import { size } from "lodash";
+import { style } from "./style";
 
 class TagInput extends React.Component {
     constructor(props) {
@@ -48,37 +49,13 @@ class TagInput extends React.Component {
     }
 
     render() {
-        const styles = {
-            container: {
-                border: "1px solid #ddd",
-                padding: "5px",
-                borderRadius: "5px"
-            },
-
-            items: {
-                display: "inline-block",
-                padding: "2px",
-                border: "1px solid blue",
-                fontFamily: "Helvetica, sans-serif",
-                borderRadius: "5px",
-                marginRight: "5px",
-                cursor: "pointer"
-            },
-
-            input: {
-                outline: "none",
-                border: "none",
-                fontSize: "14px",
-                fontFamily: "Helvetica, sans-serif"
-            }
-        };
         return (
             <label>
-                <ul style={styles.container}>
+                <ul style={style.dropdownSelectedUl}>
                     {this.state.items.map((item, i) => (
                         <li
                             key={i}
-                            style={styles.items}
+                            style={style.dropdownItems}
                             onClick={this.handleRemoveItem(item)}
                         >
                             {item.title}
@@ -86,7 +63,7 @@ class TagInput extends React.Component {
                         </li>
                     ))}
                     <input
-                        style={styles.input}
+                        style={style.dropdownInput}
                         value={this.state.input}
                         onChange={this.handleInputChange}
                         onKeyDown={this.handleInputKeyDown}
