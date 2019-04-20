@@ -2,113 +2,78 @@ import React from "react";
 import { size } from "lodash";
 import { style } from "./style";
 
+const findSelectedItems = selected => {
+  const newSelectedItems = [];
+
+  for (let key in selected) {
+    if (
+      selected[key].status === "true" &&
+      !selected[key].hasOwnProperty("child")
+    ) {
+      newSelectedItems.push({
+        id: key,
+        ...selected[key]
+      });
+    }
+  }
+  return newSelectedItems;
+};
+
 class TagInput extends React.Component {
-    constructor(props) {
-        super(props);
+  state = {
+    items: [],
+    focused: false,
+    input: ""
+  };
 
-        this.state = {
-            items: [],
-            focused: false,
-            input: ""
-        };
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
-        this.handleRemoveItem = this.handleRemoveItem.bind(this);
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    const newSelectedItems = findSelectedItems(this.props.selected);
+    if (
+      this.props.selected &&
+      size(newSelectedItems) !== size(this.state.items)
+    ) {
+      this.setState({
+        items: newSelectedItems
+      });
     }
+  }
 
-    componentDidUpdate(prevProps) {
-        // Typical usage (don't forget to compare props):
-        const newSelectedItems = [];
+  render() {
+    return (
+      <label>
+        <ul style={style.dropdownSelectedUl}>
+          {this.state.items.map((item, i) => (
+            <li
+              key={i}
+              style={style.dropdownItems}
+              onClick={this.handleRemoveItem(item)}
+            >
+              {item.title}
+              <span>(x)</span>
+            </li>
+          ))}
+          <input
+            style={style.dropdownInput}
+            value={this.state.input}
+            onChange={this.handleInputChange}
+            onKeyDown={this.handleInputKeyDown}
+          />
+        </ul>
+      </label>
+    );
+  }
 
-        for (let key in this.props.selected) {
-            if (this.props.selected[key].status === "true") {
-                newSelectedItems.push({
-                    id: key,
-                    ...this.props.selected[key]
-                });
-            }
-        }
-        if (
-            this.props.selected &&
-            size(newSelectedItems) !== size(this.state.items)
-        ) {
-            const newSelectedItems = [];
-            for (let key in this.props.selected) {
-                if (this.props.selected[key].status === "true") {
-                    newSelectedItems.push({
-                        id: key,
-                        ...this.props.selected[key]
-                    });
-                }
-            }
-            this.setState({
-                items: newSelectedItems
-            });
-        }
-    }
+  handleInputChange = evt => {
+    this.setState({ input: evt.target.value });
+    this.props.onChange(evt);
+  };
 
-    render() {
-        return (
-            <label>
-                <ul style={style.dropdownSelectedUl}>
-                    {this.state.items.map((item, i) => (
-                        <li
-                            key={i}
-                            style={style.dropdownItems}
-                            onClick={this.handleRemoveItem(item)}
-                        >
-                            {item.title}
-                            <span>(x)</span>
-                        </li>
-                    ))}
-                    <input
-                        style={style.dropdownInput}
-                        value={this.state.input}
-                        onChange={this.handleInputChange}
-                        onKeyDown={this.handleInputKeyDown}
-                    />
-                </ul>
-            </label>
-        );
-    }
-
-    handleInputChange(evt) {
-        this.setState({ input: evt.target.value });
-        this.props.onChange(evt);
-    }
-
-    //   handleInputKeyDown(evt) {
-    //     if (evt.keyCode === 13) {
-    //       const { value } = evt.target;
-
-    //       this.setState(state => ({
-    //         items: [...state.items, value],
-    //         input: ""
-    //       }));
-    //     }
-
-    //     if (
-    //       this.state.items.length &&
-    //       evt.keyCode === 8 &&
-    //       !this.state.input.length
-    //     ) {
-    //       this.setState(state => ({
-    //         items: state.items.slice(0, state.items.length - 1)
-    //       }));
-    //     }
-    //   }
-
-    handleRemoveItem(item) {
-        return () => {
-            this.props.onItemRemove(item);
-            //   this.setState(state => {
-            //     const items = state.items.filter(({ id }) => id !== item.id);
-            //     this.props.onItemRemove(item);
-            //     return { items };
-            //   });
-        };
-    }
+  handleRemoveItem = item => {
+    return () => {
+      this.props.onItemRemove(item);
+    };
+  };
 }
 
 export default TagInput;
