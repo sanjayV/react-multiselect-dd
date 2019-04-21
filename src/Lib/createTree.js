@@ -1,5 +1,17 @@
 import React from "react";
+import styled from 'styled-components';
 import Checkbox from "./Checkbox";
+
+const Ul = styled.ul`
+    overflow-y: auto;
+    overflow-x: auto;
+    margin: 0;
+    padding-left: 30px;
+
+    li {
+        list-style: none;
+    }
+`;
 
 const filterBySearch = (search, node) => {
     if (search && search !== "") {
@@ -12,7 +24,7 @@ const filterBySearch = (search, node) => {
 };
 
 const createTreeNodes = (data, search, selected, onChange) => (
-    <ul>
+    <Ul>
         {data
             .filter(c => filterBySearch(search, c))
             .map(c => {
@@ -58,7 +70,7 @@ const createTreeNodes = (data, search, selected, onChange) => (
                     </li>
                 );
             })}
-    </ul>
+    </Ul>
 );
 
 export const createTree = (data, search, selected, onChange) => {

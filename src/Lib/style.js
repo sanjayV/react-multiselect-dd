@@ -20,12 +20,19 @@ export const style = {
     },
     dropdownItems: {
         display: "inline-block",
-        padding: "2px",
-        border: "1px solid blue",
+        padding: "4px 6px",
         fontFamily: "Helvetica, sans-serif",
         borderRadius: "5px",
-        marginRight: "5px",
-        cursor: "pointer"
+        margin: "0px 4px 4px 0px",
+        cursor: "pointer",
+        backgroundColor: "#e4e7ea",
+        border: "1px solid #d2d6dc"
+    },
+    dropdownItemsRemove: {
+        marginLeft: "10px",
+        fontWeight: "1000",
+        position: "relative",
+        top: "2px"
     },
     dropdownInput: {
         outline: "none",

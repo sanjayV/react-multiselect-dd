@@ -88,7 +88,7 @@ class Multiselect extends React.Component {
                         <i className="fa fa-filter" />
                     </div>
                     <div
-                        className={`dropdown-list ${
+                        className={`${
                             this.state.isDropdownOpen ? "show" : "hide"
                             }`}
                     >
