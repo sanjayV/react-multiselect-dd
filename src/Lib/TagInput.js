@@ -1,6 +1,38 @@
 import React from "react";
+import styled from 'styled-components';
 import { size } from "lodash";
-import { style } from "./style";
+
+const CustomInput = styled.label`
+    ul {
+        padding: 0px;
+        margin: 5px;
+
+        li {
+            display: inline-block;
+            padding: 4px 6px;
+            font-family: Helvetica; sans-serif;
+            border-radius: 5px;
+            margin: 0px 4px 4px 0px;
+            cursor: pointer;
+            background-color: #e4e7ea;
+            border: 1px solid #d2d6dc;
+
+            span {
+                margin-left: 10px;
+                font-weight: 1000;
+                position: relative;
+                top: 2px;
+            }
+        }
+
+        input {
+            outline: none;
+            border: none;
+            font-size: 14px;
+            font-family: Helvetica, sans-serif;
+        }
+    }
+`;
 
 const findSelectedItems = selected => {
     const newSelectedItems = [];
@@ -41,28 +73,19 @@ class TagInput extends React.Component {
 
     render() {
         return (
-            <label>
-                <ul style={style.dropdownSelectedUl}>
+            <CustomInput>
+                <ul>
                     {this.state.items.map((item, i) => (
-                        <li
-                            key={i}
-                            style={style.dropdownItems}
-                            onClick={this.handleRemoveItem(item)}
-                        >
+                        <li key={i} onClick={this.handleRemoveItem(item)}>
                             {item.title}
-                            <span style={style.dropdownItemsRemove}>
+                            <span>
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3QAAAN0BcFOiBwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAECSURBVCiRnZHNTQNBDIU/e/YegfhpAG5EIi1EoaEkym4Jq4SZA1QBJSCxHYCEOPLTACFRckSZGS47GxZxAN7N9rOfnw3/RYxRyrLsfM+XZdmJMUqKNZGttZcmy16stb1UtNb2TJa9njt3kZokTTFZ9gzsAYsYwpmqSoQbYBeY+83mqCiKVSM1nU5PRfW2Jizr9A6wUJH+aDR6aBQSnHNdH0JVKwHMjWp/OBw+tjwkeO8jEJpDgP/4ErcanHNdoAIO6pWWAocmhGo2m50k3ta0MU+I7P9oOsY37/1xURQrBcjzfC0i18C7igwmk8n9eDy+U5EBsED1Ks/zdetBv33cn/EJBQJxcfY0zVIAAAAASUVORK5CYII=" />
                             </span>
                         </li>
                     ))}
-                    <input
-                        style={style.dropdownInput}
-                        value={this.state.input}
-                        onChange={this.handleInputChange}
-                        onKeyDown={this.handleInputKeyDown}
-                    />
+                    <input value={this.state.input} onChange={this.handleInputChange} onKeyDown={this.handleInputKeyDown} />
                 </ul>
-            </label>
+            </CustomInput>
         );
     }
 

@@ -1,10 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from 'styled-components';
 import _ from "lodash";
 import TagInput from "./TagInput";
 import { createTree } from "./createTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";
-import { style } from "./style";
+
+const Dropdown = styled.div`
+    width: 400px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: sans-serif;
+    overflow: auto;
+    position: relative;
+
+    .dropdown-inner {
+        float: left;
+        width: 100%;
+        border-bottom: 1px solid lightgray;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        border-radius: 5px 5px 0px 0px;
+        background: transparent;
+
+        background-image:linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%),
+        linear-gradient(to right, #ccc, #ccc);
+        background-position: calc(100% - 20px) calc(1em + -2px),calc(100% - 15px) calc(1em + -2px),calc(100% - 2.5em) 0.3em;
+        background-size: 6px 7px,5px 6px,1px 1.5em;
+        background-repeat: no-repeat;
+    }
+`;
 
 class Multiselect extends React.Component {
     state = {
@@ -67,9 +95,8 @@ class Multiselect extends React.Component {
                 <div className="instructions">
                     (Click to expand and select states to filter)
                 </div>
-                <div className="dropdown-container" style={style.dropdownContainer}>
-                    <div style={style.dropdownSelected}
-                        className="dropdown-button noselect"
+                <Dropdown >
+                    <div className="dropdown-inner dropdown-button noselect"
                         onClick={() =>
                             this.setState(({ isDropdownOpen }) => {
                                 return {
@@ -99,7 +126,7 @@ class Multiselect extends React.Component {
                             this.onChange
                         )}
                     </div>
-                </div>
+                </Dropdown>
             </React.Fragment>
         );
     }
