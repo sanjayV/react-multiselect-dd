@@ -113,11 +113,7 @@ class Multiselect extends React.Component {
   };
 
   toggleDropdown = status => {
-    this.setState(({ isDropdownOpen }) => {
-      return {
-        isDropdownOpen: status || !isDropdownOpen
-      };
-    });
+    this.setState({ isDropdownOpen: status });
   };
 
   render() {
@@ -139,10 +135,7 @@ class Multiselect extends React.Component {
               toggleDropdown={this.toggleDropdown}
               maxLimitOfSelectedItems={this.props.maxLimitOfSelectedItems}
             />
-            <i
-              onClick={() => this.toggleDropdown(false)}
-              className="fa fa-filter"
-            />
+            <i className="fa fa-filter" />
           </div>
           <div className={`${this.state.isDropdownOpen ? "show" : "hide"}`}>
             {createTree(data, search, selectedState, this.onChange)}
