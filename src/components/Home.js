@@ -61,7 +61,7 @@ const Home = () => {
       <Multiselect
         data={sampleData}
         onChange={getSelected}
-        maxLimitOfSelectedItems={3}
+        maxLimitOfSelectedItems={2}
       />
     </React.Fragment>
   );

@@ -155,7 +155,7 @@ Multiselect.propTypes = {
 Multiselect.defaultProps = {
   data: [],
   onChange: () => {},
-  maxLimitOfSelectedItems: 3
+  maxLimitOfSelectedItems: 2
 };
 
 export default Multiselect;
