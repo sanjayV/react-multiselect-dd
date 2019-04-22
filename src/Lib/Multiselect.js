@@ -135,6 +135,7 @@ class Multiselect extends React.Component {
                 this.reCreateTreeState(false, item)
               }
               toggleDropdown={this.toggleDropdown}
+              maxLimitOfSelectedItems={this.props.maxLimitOfSelectedItems}
             />
             <i
               onClick={() => this.toggleDropdown(false)}
@@ -151,13 +152,15 @@ class Multiselect extends React.Component {
 }
 
 Multiselect.propTypes = {
-  data: PropTypes.array,
-  onChange: PropTypes.func
+  data: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
+  maxLimitOfSelectedItems: PropTypes.number
 };
 
 Multiselect.defaultProps = {
   data: [],
-  onChange: () => {}
+  onChange: () => {},
+  maxLimitOfSelectedItems: 3
 };
 
 export default Multiselect;

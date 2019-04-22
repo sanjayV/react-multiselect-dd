@@ -74,8 +74,12 @@ class TagInput extends React.Component {
 
   render() {
     const { items, input } = this.state;
+    const { maxLimitOfSelectedItems } = this.props;
     const itemsLength = items.length;
-    const MAX_NUMBER_OF_ELEMENTS = itemsLength > 3 ? 3 : itemsLength;
+    const MAX_NUMBER_OF_ELEMENTS =
+      itemsLength > maxLimitOfSelectedItems
+        ? maxLimitOfSelectedItems
+        : itemsLength;
     return (
       <CustomInput>
         <ul>
@@ -120,7 +124,8 @@ class TagInput extends React.Component {
 }
 
 TagInput.propTypes = {
-  toggleDropdown: PropTypes.func
+  toggleDropdown: PropTypes.func,
+  maxLimitOfSelectedItems: PropTypes.number.isRequired
 };
 
 TagInput.defaultProps = {
