@@ -17,6 +17,8 @@ const Dropdown = styled.div`
   margin-left: 10px;
 
   .dropdown-inner {
+    max-height: 40px;
+    overflow: hidden;
     float: left;
     width: 100%;
     border-bottom: 1px solid lightgray;
