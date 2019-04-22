@@ -121,9 +121,6 @@ class Multiselect extends React.Component {
     const { data } = this.props;
     return (
       <React.Fragment>
-        <div className="instructions">
-          (Click to expand and select states to filter)
-        </div>
         <Dropdown ref={this.setWrapperRef}>
           <div className="dropdown-inner dropdown-button noselect">
             <TagInput
