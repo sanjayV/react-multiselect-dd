@@ -94,7 +94,9 @@ class TagInput extends React.Component {
               </span>
             </li>
           ))}
-          {itemsLength > MAX_NUMBER_OF_ELEMENTS && <li key="...">...</li>}
+          {itemsLength > MAX_NUMBER_OF_ELEMENTS && (
+            <li key="...">... {itemsLength - MAX_NUMBER_OF_ELEMENTS} more</li>
+          )}
           <input
             onFocus={() => {
               this.props.toggleDropdown(true);
