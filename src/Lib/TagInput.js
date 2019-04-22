@@ -83,20 +83,17 @@ class TagInput extends React.Component {
     return (
       <CustomInput>
         <ul>
-          {items
-            .reverse()
-            .slice(0, MAX_NUMBER_OF_ELEMENTS)
-            .map((item, i) => (
-              <li key={i} onClick={this.handleRemoveItem(item)}>
-                {item.title}
-                <span>
-                  <img
-                    alt="Icon"
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3QAAAN0BcFOiBwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAECSURBVCiRnZHNTQNBDIU/e/YegfhpAG5EIi1EoaEkym4Jq4SZA1QBJSCxHYCEOPLTACFRckSZGS47GxZxAN7N9rOfnw3/RYxRyrLsfM+XZdmJMUqKNZGttZcmy16stb1UtNb2TJa9njt3kZokTTFZ9gzsAYsYwpmqSoQbYBeY+83mqCiKVSM1nU5PRfW2Jizr9A6wUJH+aDR6aBQSnHNdH0JVKwHMjWp/OBw+tjwkeO8jEJpDgP/4ErcanHNdoAIO6pWWAocmhGo2m50k3ta0MU+I7P9oOsY37/1xURQrBcjzfC0i18C7igwmk8n9eDy+U5EBsED1Ks/zdetBv33cn/EJBQJxcfY0zVIAAAAASUVORK5CYII="
-                  />
-                </span>
-              </li>
-            ))}
+          {items.slice(0, MAX_NUMBER_OF_ELEMENTS).map((item, i) => (
+            <li key={i} onClick={this.handleRemoveItem(item)}>
+              {item.title}
+              <span>
+                <img
+                  alt="Icon"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3QAAAN0BcFOiBwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAECSURBVCiRnZHNTQNBDIU/e/YegfhpAG5EIi1EoaEkym4Jq4SZA1QBJSCxHYCEOPLTACFRckSZGS47GxZxAN7N9rOfnw3/RYxRyrLsfM+XZdmJMUqKNZGttZcmy16stb1UtNb2TJa9njt3kZokTTFZ9gzsAYsYwpmqSoQbYBeY+83mqCiKVSM1nU5PRfW2Jizr9A6wUJH+aDR6aBQSnHNdH0JVKwHMjWp/OBw+tjwkeO8jEJpDgP/4ErcanHNdoAIO6pWWAocmhGo2m50k3ta0MU+I7P9oOsY37/1xURQrBcjzfC0i18C7igwmk8n9eDy+U5EBsED1Ks/zdetBv33cn/EJBQJxcfY0zVIAAAAASUVORK5CYII="
+                />
+              </span>
+            </li>
+          ))}
           {itemsLength > MAX_NUMBER_OF_ELEMENTS && <li key="...">...</li>}
           <input
             onFocus={() => {
