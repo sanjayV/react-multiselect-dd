@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "./Checkbox.style";
+import Container from "./style/Checkbox.style";
 
 class IndeterminateCheckbox extends React.Component {
   componentDidMount() {

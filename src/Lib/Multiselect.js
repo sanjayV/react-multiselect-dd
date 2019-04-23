@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import Dropdown from "./Multiselect.style";
+import Dropdown from "./style/Multiselect.style";
 import TagInput from "./TagInput";
 import { CheckboxTree } from "./CheckboxTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";

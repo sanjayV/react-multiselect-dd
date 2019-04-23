@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { size } from "lodash";
-import CustomInput from "./TagInput.style";
+import CustomInput from "./style/TagInput.style";
 
 const findSelectedItems = selected => {
   const newSelectedItems = [];

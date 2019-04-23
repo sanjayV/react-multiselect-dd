@@ -1,17 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import Ul from "./style/CheckboxTree.style";
 import Checkbox from "./Checkbox";
-
-const Ul = styled.ul`
-  overflow-y: auto;
-  overflow-x: auto;
-  margin: 0;
-  padding-left: 30px;
-
-  li {
-    list-style: none;
-  }
-`;
 
 const filterBySearch = (search, node) => {
   if (search && search !== "") {
