@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import Dropdown from "./Multiselect.style";
 import TagInput from "./TagInput";
-import { createTree } from "./createTree";
+import { CheckboxTree } from "./CheckboxTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";
 
 class Multiselect extends React.Component {
@@ -103,7 +103,12 @@ class Multiselect extends React.Component {
             <i className="fa fa-filter" />
           </div>
           <div className={`${this.state.isDropdownOpen ? "show" : "hide"}`}>
-            {createTree(data, search, selectedState, this.onChange)}
+            <CheckboxTree
+              data={data}
+              search={search}
+              selected={selectedState}
+              onChange={this.onChange}
+            />
           </div>
         </Dropdown>
       </React.Fragment>
