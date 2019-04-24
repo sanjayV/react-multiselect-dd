@@ -3,23 +3,6 @@ import PropTypes from "prop-types";
 import { size } from "lodash";
 import CustomInput from "./style/TagInput.style";
 
-const findSelectedItems = selected => {
-  const newSelectedItems = [];
-
-  for (let key in selected) {
-    if (
-      selected[key].status === "true" &&
-      !selected[key].hasOwnProperty("child")
-    ) {
-      newSelectedItems.push({
-        id: key,
-        ...selected[key]
-      });
-    }
-  }
-  return newSelectedItems;
-};
-
 class TagInput extends React.Component {
   state = {
     items: [],
@@ -29,13 +12,12 @@ class TagInput extends React.Component {
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    const newSelectedItems = findSelectedItems(this.props.selected);
     if (
       this.props.selected &&
-      size(newSelectedItems) !== size(this.state.items)
+      size(this.props.selected) !== size(this.state.items)
     ) {
       this.setState({
-        items: newSelectedItems
+        items: this.props.selected
       });
     }
   }

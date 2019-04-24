@@ -33,37 +33,40 @@ class Multiselect extends React.Component {
 
   reCreateTreeState = (checked, d) => {
     const { selectedState } = this.state;
-    const { data } = this.props;
-
-    const searchPath = data.reduce((acc, child) => {
-      const findResult = findInTree(parseInt(d.id), child);
-      if (!_.isEmpty(findResult, true)) {
-        return findResult;
-      }
-      return acc;
-    }, undefined);
-
-    if (searchPath && searchPath.path && searchPath.path instanceof Array) {
-      searchPath.path.pop();
-    }
+    const { data, grouped } = this.props;
 
     selectedState[parseInt(d.id)] = {
       status: checked.toString(),
       ...d
     };
+    let newSelectedState = selectedState;
 
-    let updatedSelectedState = selectedState;
-    if (d.child) {
-      updatedSelectedState = updateChildState(
-        selectedState,
-        d.child,
-        checked.toString()
-      );
+    if (grouped) {
+      const searchPath = data.reduce((acc, child) => {
+        const findResult = findInTree(parseInt(d.id), child);
+        if (!_.isEmpty(findResult, true)) {
+          return findResult;
+        }
+        return acc;
+      }, undefined);
+
+      if (searchPath && searchPath.path && searchPath.path instanceof Array) {
+        searchPath.path.pop();
+      }
+
+      let updatedSelectedState = selectedState;
+      if (d.child) {
+        updatedSelectedState = updateChildState(
+          selectedState,
+          d.child,
+          checked.toString()
+        );
+      }
+
+      newSelectedState = searchPath
+        ? updateTreeState(searchPath, updatedSelectedState)
+        : updatedSelectedState;
     }
-
-    const newSelectedState = searchPath
-      ? updateTreeState(searchPath, updatedSelectedState)
-      : updatedSelectedState;
 
     this.setState(
       {
@@ -85,24 +88,32 @@ class Multiselect extends React.Component {
   };
 
   render() {
-    const { search, selectedState } = this.state;
-    const { data } = this.props;
+    const { search, selectedState, isDropdownOpen } = this.state;
+    const { data, grouped, maxLimitOfSelectedItems } = this.props;
+
+    const filteredSelected = Object.entries(selectedState)
+      .filter(
+        ([key, val]) =>
+          (!grouped && val.status === "true") ||
+          (grouped && val.status === "true" && !val.hasOwnProperty("child"))
+      )
+      .reduce((arr, [key, val]) => [...arr, { id: key, ...val }], []);
     return (
       <React.Fragment>
         <Dropdown ref={this.setWrapperRef}>
           <div className="dropdown-inner dropdown-button noselect">
             <TagInput
               onChange={e => this.setState({ search: e.target.value })}
-              selected={this.state.selectedState}
+              selected={filteredSelected}
               onItemRemove={({ status, ...item }) =>
                 this.reCreateTreeState(false, item)
               }
               toggleDropdown={this.toggleDropdown}
-              maxLimitOfSelectedItems={this.props.maxLimitOfSelectedItems}
+              maxLimitOfSelectedItems={maxLimitOfSelectedItems}
             />
             <i className="fa fa-filter" />
           </div>
-          <div className={`${this.state.isDropdownOpen ? "show" : "hide"}`}>
+          <div className={`${isDropdownOpen ? "show" : "hide"}`}>
             <CheckboxTree
               data={data}
               search={search}
@@ -119,13 +130,15 @@ class Multiselect extends React.Component {
 Multiselect.propTypes = {
   data: PropTypes.array.isRequired,
   onChange: PropTypes.func,
-  maxLimitOfSelectedItems: PropTypes.number
+  maxLimitOfSelectedItems: PropTypes.number,
+  grouped: PropTypes.bool
 };
 
 Multiselect.defaultProps = {
   data: [],
   onChange: () => {},
-  maxLimitOfSelectedItems: 2
+  maxLimitOfSelectedItems: 2,
+  grouped: true
 };
 
 export default Multiselect;
