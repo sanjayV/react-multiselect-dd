@@ -24,6 +24,7 @@ ul {
     }
 
     input {
+        width: 20%;
         outline: none;
         border: none;
         font-size: 14px;

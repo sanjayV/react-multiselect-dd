@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default styled.div`
-  width: 400px;
+  width: 360px;
   border: 1px solid lightgray;
   border-radius: 5px;
   font-size: 14px;
@@ -11,7 +11,7 @@ export default styled.div`
   margin-left: 10px;
 
   .dropdown-inner {
-    max-height: 40px;
+    min-height: 41px;
     overflow: hidden;
     float: left;
     width: 100%;
