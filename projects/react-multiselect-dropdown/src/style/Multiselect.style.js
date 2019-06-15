@@ -8,7 +8,8 @@ export default styled.div`
   font-family: sans-serif;
   overflow: auto;
   position: relative;
-  margin-left: 10px;
+  margin-left: 0px;
+  text-align: left;
 
   .dropdown-inner {
     min-height: 41px;
@@ -29,5 +30,13 @@ export default styled.div`
       calc(100% - 15px) calc(1em + -2px), calc(100% - 2.5em) 0.3em;
     background-size: 6px 7px, 5px 6px, 1px 1.5em;
     background-repeat: no-repeat;
+  }
+
+  .show {
+    display: block;
+  }
+  
+  .hide {
+    display: none;
   }
 `;

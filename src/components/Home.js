@@ -1,5 +1,5 @@
 import React from "react";
-import Multiselect from "../Lib/Multiselect";
+import Multiselect from "react-multiselect-dropdown";
 
 const getSelected = selected => {
     console.log("your selected value is => ", selected);
