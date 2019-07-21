@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.label`
+export default styled.div`
 ul {
     padding: 0px;
     margin: 5px;
@@ -23,12 +23,16 @@ ul {
         }
     }
 
-    input {
+    .li-input {
         width: 20%;
-        outline: none;
+        background: none;
         border: none;
-        font-size: 14px;
-        font-family: Helvetica, sans-serif;
+        input {
+            outline: none;
+            border: none;
+            font-size: 14px;
+            font-family: Helvetica, sans-serif;
+        }
     }
 }
 `;

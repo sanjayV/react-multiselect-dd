@@ -6,11 +6,15 @@ import { CheckboxTree } from "./CheckboxTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";
 
 class Multiselect extends React.Component {
-    state = {
-        isDropdownOpen: false,
-        search: "",
-        selectedState: {}
-    };
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            isDropdownOpen: false,
+            search: "",
+            selectedState: {}
+        };
+    }
 
     componentDidMount() {
         document.addEventListener("mousedown", this.handleClickOutside);
@@ -25,8 +29,8 @@ class Multiselect extends React.Component {
     };
 
     handleClickOutside = e => {
-        if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
-            this.toggleDropdown(false);
+        if (this.wrapperRef) {
+            this.toggleDropdown(!!this.wrapperRef.contains(e.target) && e.target.className !== 'dropdown-button-arrow pointer active');
         }
     };
 
@@ -100,26 +104,25 @@ class Multiselect extends React.Component {
         return (
             <React.Fragment>
                 <Dropdown ref={this.setWrapperRef}>
-                    <div className="dropdown-inner dropdown-button noselect">
+                    <div className="dropdown-inner dropdown-button noselect pointer">
                         <TagInput
                             onChange={e => this.setState({ search: e.target.value })}
                             selected={filteredSelected}
                             onItemRemove={({ status, ...item }) =>
                                 this.reCreateTreeState(false, item)
                             }
-                            toggleDropdown={this.toggleDropdown}
                             maxLimitOfSelectedItems={maxLimitOfSelectedItems}
                         />
-                        <i className="fa fa-filter" />
                     </div>
-                    <div className={`${isDropdownOpen ? "show" : "hide"}`}>
+                    <div className={`dropdown-button-arrow pointer ${isDropdownOpen ? "active" : ""}`}></div>
+                    {isDropdownOpen &&
                         <CheckboxTree
                             data={data}
                             search={search}
                             selected={selectedState}
                             onChange={this.onChange}
                         />
-                    </div>
+                    }
                 </Dropdown>
             </React.Fragment>
         );
