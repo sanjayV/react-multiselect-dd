@@ -24,7 +24,7 @@ export default styled.label`
     }
   }
 
-  input[indeterminate] ~ span {
+  input[indeterminate='true'] ~ span {
     background-color: #e6783b;
     content: "-";
 

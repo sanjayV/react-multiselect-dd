@@ -6,7 +6,7 @@ class IndeterminateCheckbox extends React.Component {
         super(props);
 
         this.state = {
-            attributes: ''
+            attributes: { indeterminate: 'false' }
         };
     }
 
@@ -25,6 +25,10 @@ class IndeterminateCheckbox extends React.Component {
             if (this.props.indeterminate) {
                 this.setState({
                     attributes: { indeterminate: this.props.indeterminate }
+                });
+            } else {
+                this.setState({
+                    attributes: { indeterminate: 'false' }
                 });
             }
         }
