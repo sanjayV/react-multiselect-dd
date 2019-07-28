@@ -5,6 +5,13 @@ import TagInput from "./TagInput";
 import { CheckboxTree } from "./CheckboxTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";
 
+const default_custom_style = {
+    optionHeight: 400,
+    checkedColor: '#ff0000',
+    inputHeight: 40,
+    inputWidth: 360
+};
+
 class Multiselect extends React.Component {
     constructor(props) {
         super(props);
@@ -93,7 +100,9 @@ class Multiselect extends React.Component {
     render() {
         const { search, selectedState, isDropdownOpen } = this.state;
         const { data, customStyle, grouped, maxLimitOfSelectedItems } = this.props;
-        
+
+        const updatedCustomStyle = { ...default_custom_style, ...customStyle };
+
         const filteredSelected = Object.entries(selectedState)
             .filter(
             ([key, val]) =>
@@ -103,7 +112,7 @@ class Multiselect extends React.Component {
             .reduce((arr, [key, val]) => [...arr, { id: key, ...val }], []);
         return (
             <React.Fragment>
-                <Dropdown inputWidth={customStyle.inputWidth} inputHeight={customStyle.inputHeight} ref={this.setWrapperRef}>
+                <Dropdown inputWidth={updatedCustomStyle.inputWidth} inputHeight={updatedCustomStyle.inputHeight} ref={this.setWrapperRef}>
                     <div className="dropdown-inner dropdown-button noselect pointer">
                         <TagInput
                             onChange={e => this.setState({ search: e.target.value })}
@@ -118,12 +127,12 @@ class Multiselect extends React.Component {
                     {isDropdownOpen &&
                         <CheckboxTree
                             data={data}
-                            optionHeight={customStyle.optionHeight}
-                            checkedColor={customStyle.checkedColor}
+                            optionHeight={updatedCustomStyle.optionHeight}
+                            checkedColor={updatedCustomStyle.checkedColor}
                             search={search}
-                    selected={selectedState}
-                    onChange={this.onChange}
-                    />
+                            selected={selectedState}
+                            onChange={this.onChange}
+                        />
                     }
                 </Dropdown>
             </React.Fragment>
@@ -148,9 +157,9 @@ Multiselect.defaultProps = {
     data: [],
     customStyle: {
         optionHeight: 400,
-        checkedColor: '#ff0000',
+        checkedColor: '#e6783b',
         inputHeight: 40,
-        inputWidth: 360,
+        inputWidth: 360
     },
     onChange: () => { },
     maxLimitOfSelectedItems: 2,
