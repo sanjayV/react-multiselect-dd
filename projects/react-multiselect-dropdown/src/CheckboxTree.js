@@ -21,8 +21,8 @@ const filterBySearch = (search, node) => {
     return true;
 };
 
-export const CheckboxTree = ({ data, search, selected, onChange }) => (
-    <Ul>
+export const CheckboxTree = ({ data, optionHeight, checkedColor, search, selected, onChange }) => (
+    <Ul height={optionHeight}>
         {data
             .filter(c => filterBySearch(search, c))
             .map(c => {
@@ -33,12 +33,14 @@ export const CheckboxTree = ({ data, search, selected, onChange }) => (
                             {selected[c.id] && selected[c.id].status === "indeterminate" ? (
                                 <Checkbox
                                     label={c.title}
+                                    checkedColor={checkedColor}
                                     indeterminate="true"
                                     onChange={e => onChange(e, c)}
                                 />
                             ) : (
                                     <Checkbox
                                         label={c.title}
+                                        checkedColor={checkedColor}
                                         checked={
                                             !!(selected[c.id] && selected[c.id].status === "true")
                                         }
@@ -47,6 +49,7 @@ export const CheckboxTree = ({ data, search, selected, onChange }) => (
                                 )}
                             <CheckboxTree
                                 data={c.child}
+                                checkedColor={checkedColor}
                                 search={search}
                                 selected={selected}
                                 onChange={onChange}
@@ -60,12 +63,14 @@ export const CheckboxTree = ({ data, search, selected, onChange }) => (
                         {selected[c.id] && selected[c.id].status === "indeterminate" ? (
                             <Checkbox
                                 label={c.title}
+                                checkedColor={checkedColor}
                                 indeterminate="true"
                                 onChange={e => onChange(e, c)}
                             />
                         ) : (
                                 <Checkbox
                                     label={c.title}
+                                    checkedColor={checkedColor}
                                     checked={!!(selected[c.id] && selected[c.id].status === "true")}
                                     onChange={e => onChange(e, c)}
                                 />

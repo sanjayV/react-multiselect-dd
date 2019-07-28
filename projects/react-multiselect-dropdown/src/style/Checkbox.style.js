@@ -15,8 +15,8 @@ export default styled.label`
     width: 0;
 
     &:checked ~ span {
-      background-color: #e6783b;
-      border-color: #e6783b;
+      background-color: ${props => props.checkedColor || "#e6783b"};
+      border-color: ${props => props.checkedColor || "#e6783b"};
 
       &:after {
         display: block;
@@ -25,7 +25,7 @@ export default styled.label`
   }
 
   input[indeterminate='true'] ~ span {
-    background-color: #e6783b;
+    background-color: ${props => props.checkedColor || "#e6783b"};
     content: "-";
 
     &:after {

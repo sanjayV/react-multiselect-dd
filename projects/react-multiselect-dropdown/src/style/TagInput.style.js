@@ -8,7 +8,7 @@ ul {
     li {
         display: inline-block;
         padding: 4px 6px;
-        font-family: Helvetica; sans-serif;
+        font-family: inherit;
         border-radius: 5px;
         margin: 0px 4px 4px 0px;
         cursor: pointer;
@@ -30,8 +30,8 @@ ul {
         input {
             outline: none;
             border: none;
-            font-size: 14px;
-            font-family: Helvetica, sans-serif;
+            font-size: inherit;
+            font-family: inherit;
         }
     }
 }

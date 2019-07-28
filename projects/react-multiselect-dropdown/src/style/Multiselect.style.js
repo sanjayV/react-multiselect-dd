@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export default styled.div`
-    width: 360px;
+    width: ${props => props.inputWidth + "px" || "360px"};
+    min-height: ${props => props.inputHeight + "px" || "40px"};
     border: 1px solid lightgray;
     border-radius: 5px;
-    font-size: 14px;
-    font-family: sans-serif;
+    font-size: inherit;
+    font-family: inherit;
     overflow: auto;
     position: relative;
     margin-left: 0px;
     text-align: left;
 
     .dropdown-inner {
-        min-height: 41px;
         overflow: hidden;
         float: left;
         width: calc(100% - 25px);
@@ -36,7 +36,7 @@ export default styled.div`
         width: 25px;
         position: absolute;
         right: 0;
-        height: 41px;
+        height: auto;
     }
 
     .dropdown-button-arrow:after {
@@ -45,7 +45,7 @@ export default styled.div`
         border-top: 7px solid grey;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        top: 12px;
+        top: 14px;
         right: 8px;
     }
 

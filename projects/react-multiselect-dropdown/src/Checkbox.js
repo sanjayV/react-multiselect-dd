@@ -36,7 +36,7 @@ class IndeterminateCheckbox extends React.Component {
 
     render() {
         return (
-            <Container>
+            <Container checkedColor={this.props.checkedColor}>
                 <p>{this.props.label}</p>
                 <input
                     {...this.props}

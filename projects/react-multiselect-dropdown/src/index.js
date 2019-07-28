@@ -8,7 +8,7 @@ import { updateChildState, findInTree, updateTreeState } from "./helper";
 class Multiselect extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             isDropdownOpen: false,
             search: "",
@@ -92,8 +92,8 @@ class Multiselect extends React.Component {
 
     render() {
         const { search, selectedState, isDropdownOpen } = this.state;
-        const { data, grouped, maxLimitOfSelectedItems } = this.props;
-
+        const { data, customStyle, grouped, maxLimitOfSelectedItems } = this.props;
+        
         const filteredSelected = Object.entries(selectedState)
             .filter(
             ([key, val]) =>
@@ -103,7 +103,7 @@ class Multiselect extends React.Component {
             .reduce((arr, [key, val]) => [...arr, { id: key, ...val }], []);
         return (
             <React.Fragment>
-                <Dropdown ref={this.setWrapperRef}>
+                <Dropdown inputWidth={customStyle.inputWidth} inputHeight={customStyle.inputHeight} ref={this.setWrapperRef}>
                     <div className="dropdown-inner dropdown-button noselect pointer">
                         <TagInput
                             onChange={e => this.setState({ search: e.target.value })}
@@ -118,10 +118,12 @@ class Multiselect extends React.Component {
                     {isDropdownOpen &&
                         <CheckboxTree
                             data={data}
+                            optionHeight={customStyle.optionHeight}
+                            checkedColor={customStyle.checkedColor}
                             search={search}
-                            selected={selectedState}
-                            onChange={this.onChange}
-                        />
+                    selected={selectedState}
+                    onChange={this.onChange}
+                    />
                     }
                 </Dropdown>
             </React.Fragment>
@@ -131,6 +133,12 @@ class Multiselect extends React.Component {
 
 Multiselect.propTypes = {
     data: PropTypes.array.isRequired,
+    customStyle: PropTypes.shape({
+        optionHeight: PropTypes.number,
+        checkedColor: PropTypes.string,
+        inputHeight: PropTypes.number,
+        inputWidth: PropTypes.number,
+    }),
     onChange: PropTypes.func,
     maxLimitOfSelectedItems: PropTypes.number,
     grouped: PropTypes.bool
@@ -138,6 +146,12 @@ Multiselect.propTypes = {
 
 Multiselect.defaultProps = {
     data: [],
+    customStyle: {
+        optionHeight: 400,
+        checkedColor: '#ff0000',
+        inputHeight: 40,
+        inputWidth: 360,
+    },
     onChange: () => { },
     maxLimitOfSelectedItems: 2,
     grouped: true
