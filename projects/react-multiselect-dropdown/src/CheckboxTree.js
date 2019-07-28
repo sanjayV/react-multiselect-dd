@@ -5,10 +5,19 @@ import Checkbox from "./Checkbox";
 const filterBySearch = (search, node) => {
     if (search && search !== "") {
         if (node.title.search(search) > -1) {
-            return true;
+            return node;
+        } else if (node.child != null) {
+            var i;
+            var result = null;
+            for (i = 0; result == null && i < node.child.length; i++) {
+                result = filterBySearch(search, node.child[i]);
+            }
+            return result;
+        } else {
+            return false;
         }
-        return false;
     }
+
     return true;
 };
 

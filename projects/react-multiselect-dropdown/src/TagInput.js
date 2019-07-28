@@ -75,10 +75,12 @@ class TagInput extends React.Component {
 }
 
 TagInput.propTypes = {
-    maxLimitOfSelectedItems: PropTypes.number.isRequired
+    maxLimitOfSelectedItems: PropTypes.number.isRequired,
+    onChange: PropTypes.func
 };
 
 TagInput.defaultProps = {
+    onChange: () => { }
 };
 
 export default TagInput;
