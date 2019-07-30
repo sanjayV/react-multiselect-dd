@@ -6,8 +6,6 @@ A reactjs multiselect dropdown with search functionality and multiple other opti
   - Support search on tree view structure
   - Provides options for update UI according current theme
 
-### Demo: https://sanjayv.github.io/react-multiselect-dd/
-
 
 # Installation
 `npm install react-multiselect-dd`

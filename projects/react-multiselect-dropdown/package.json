@@ -1,6 +1,6 @@
 {
     "name": "react-multiselect-dd",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "React multiselect dropdown. Support tree structure view, support search on tree, easily customizable according current theme. npm install react-multiselect-dd --save",
     "main": "build/index.js",
     "scripts": {
