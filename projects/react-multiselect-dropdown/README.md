@@ -20,7 +20,7 @@ import Multiselect from "react-multiselect-dd";
 <Multiselect
     data={sampleData}
     onChange={getSelected}
-    maxLimitOfSelectedItems={2}/>
+    showSelected={2}/>
 ```
 
 **sampleData format**
@@ -56,7 +56,7 @@ const sampleData = [
 |------|------|-----------|-------------|---------|
 | data | Array | Data array that use in multiselect dropdown | Yes   | [] |
 | onChange | Function | Callback function that use for get selected values  | Yes | |
-| maxLimitOfSelectedItems | Number  | Max limit of display selected item in input, after that it will display total selected count. | No | 2 |
+| showSelected | Number  | Max limit of display selected item in input, after that it will display total selected count. | No | 2 |
 | customStyle | Object | Detail here | No |  |
 
 
@@ -78,7 +78,7 @@ You can pass following options in **customStyle** props.
 <Multiselect
     data={sampleData}
     onChange={getSelected}
-    maxLimitOfSelectedItems={2}
+    showSelected={2}
     customStyle={{
         'optionHeight': 400,
         'checkedColor': '#e6783b',

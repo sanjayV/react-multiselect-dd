@@ -3,9 +3,14 @@ import styled from "styled-components";
 export default styled.label`
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding-left: 30px;
+  margin-bottom: 10px;
   cursor: pointer;
+
+  p {
+    margin-bottom: .5em;
+    margin-top: 0.5em;
+  }
 
   input {
     position: absolute;
@@ -29,8 +34,8 @@ export default styled.label`
     content: "-";
 
     &:after {
-      left: 9px;
-      top: 5px;
+      left: 6px;
+      top: 2px;
       width: 5px;
       height: 10px;
       border: solid white;
@@ -46,8 +51,8 @@ export default styled.label`
     position: absolute;
     top: 0px;
     left: 0px;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     border: 1px solid rgb(171, 171, 170);
     border-radius: 4px;
 
@@ -56,8 +61,8 @@ export default styled.label`
       position: absolute;
       display: none;
 
-      left: 9px;
-      top: 5px;
+      left: 6px;
+      top: 2px;
       width: 5px;
       height: 10px;
       border: solid white;

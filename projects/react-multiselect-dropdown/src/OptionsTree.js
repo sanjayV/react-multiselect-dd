@@ -1,6 +1,6 @@
 import React from "react";
-import Ul from "./style/CheckboxTree.style";
-import Checkbox from "./Checkbox";
+import OptionsTreeUi from "./style/OptionsTree";
+import Select from "./Select";
 
 const filterBySearch = (search, node) => {
     if (search && search !== "") {
@@ -21,8 +21,8 @@ const filterBySearch = (search, node) => {
     return true;
 };
 
-export const CheckboxTree = ({ data, optionHeight, checkedColor, search, selected, onChange }) => (
-    <Ul height={optionHeight}>
+export const OptionsTree = ({ data, optionHeight, checkedColor, search, selected, onChange }) => (
+    <OptionsTreeUi height={optionHeight}>
         {data
             .filter(c => filterBySearch(search, c))
             .map(c => {
@@ -31,14 +31,14 @@ export const CheckboxTree = ({ data, optionHeight, checkedColor, search, selecte
                         <li key={c.title}>
                             {" "}
                             {selected[c.id] && selected[c.id].status === "indeterminate" ? (
-                                <Checkbox
+                                <Select
                                     label={c.title}
                                     checkedColor={checkedColor}
                                     indeterminate="true"
                                     onChange={e => onChange(e, c)}
                                 />
                             ) : (
-                                    <Checkbox
+                                    <Select
                                         label={c.title}
                                         checkedColor={checkedColor}
                                         checked={
@@ -47,7 +47,7 @@ export const CheckboxTree = ({ data, optionHeight, checkedColor, search, selecte
                                         onChange={e => onChange(e, c)}
                                     />
                                 )}
-                            <CheckboxTree
+                            <OptionsTree
                                 data={c.child}
                                 checkedColor={checkedColor}
                                 search={search}
@@ -61,14 +61,14 @@ export const CheckboxTree = ({ data, optionHeight, checkedColor, search, selecte
                     <li key={c.title}>
                         {" "}
                         {selected[c.id] && selected[c.id].status === "indeterminate" ? (
-                            <Checkbox
+                            <Select
                                 label={c.title}
                                 checkedColor={checkedColor}
                                 indeterminate="true"
                                 onChange={e => onChange(e, c)}
                             />
                         ) : (
-                                <Checkbox
+                                <Select
                                     label={c.title}
                                     checkedColor={checkedColor}
                                     checked={!!(selected[c.id] && selected[c.id].status === "true")}
@@ -78,5 +78,5 @@ export const CheckboxTree = ({ data, optionHeight, checkedColor, search, selecte
                     </li>
                 );
             })}
-    </Ul>
+    </OptionsTreeUi>
 );

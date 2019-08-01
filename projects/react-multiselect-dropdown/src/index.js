@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Dropdown from "./style/Multiselect.style";
-import TagInput from "./TagInput";
-import { CheckboxTree } from "./CheckboxTree";
+import MultiselectUi from "./style/Multiselect";
+import MultiselectOption from "./MultiselectOption";
+import { OptionsTree } from "./OptionsTree";
 import { updateChildState, findInTree, updateTreeState } from "./helper";
 
 const default_custom_style = {
     optionHeight: 400,
-    checkedColor: '#ff0000',
+    checkedColor: '#186ba0',
     inputHeight: 40,
     inputWidth: 360
 };
@@ -99,7 +99,7 @@ class Multiselect extends React.Component {
 
     render() {
         const { search, selectedState, isDropdownOpen } = this.state;
-        const { data, customStyle, grouped, maxLimitOfSelectedItems } = this.props;
+        const { data, customStyle, grouped, showSelected } = this.props;
 
         const updatedCustomStyle = { ...default_custom_style, ...customStyle };
 
@@ -112,20 +112,22 @@ class Multiselect extends React.Component {
             .reduce((arr, [key, val]) => [...arr, { id: key, ...val }], []);
         return (
             <React.Fragment>
-                <Dropdown inputWidth={updatedCustomStyle.inputWidth} inputHeight={updatedCustomStyle.inputHeight} ref={this.setWrapperRef}>
-                    <div className="dropdown-inner dropdown-button noselect pointer">
-                        <TagInput
+                <MultiselectUi
+                    inputWidth={updatedCustomStyle.inputWidth}
+                    inputHeight={updatedCustomStyle.inputHeight} ref={this.setWrapperRef}>
+                    <div className="multiselect-main pointer">
+                        <MultiselectOption
                             onChange={e => this.setState({ search: e.target.value })}
                             selected={filteredSelected}
                             onItemRemove={({ status, ...item }) =>
                                 this.reCreateTreeState(false, item)
                             }
-                            maxLimitOfSelectedItems={maxLimitOfSelectedItems}
+                            showSelected={showSelected}
                         />
                     </div>
                     <div className={`dropdown-button-arrow pointer ${isDropdownOpen ? "active" : ""}`}></div>
                     {isDropdownOpen &&
-                        <CheckboxTree
+                        <OptionsTree
                             data={data}
                             optionHeight={updatedCustomStyle.optionHeight}
                             checkedColor={updatedCustomStyle.checkedColor}
@@ -134,7 +136,7 @@ class Multiselect extends React.Component {
                             onChange={this.onChange}
                         />
                     }
-                </Dropdown>
+                </MultiselectUi>
             </React.Fragment>
         );
     }
@@ -149,7 +151,7 @@ Multiselect.propTypes = {
         inputWidth: PropTypes.number,
     }),
     onChange: PropTypes.func,
-    maxLimitOfSelectedItems: PropTypes.number,
+    showSelected: PropTypes.number,
     grouped: PropTypes.bool
 };
 
@@ -157,12 +159,12 @@ Multiselect.defaultProps = {
     data: [],
     customStyle: {
         optionHeight: 400,
-        checkedColor: '#e6783b',
+        checkedColor: '#186ba0',
         inputHeight: 40,
         inputWidth: 360
     },
     onChange: () => { },
-    maxLimitOfSelectedItems: 2,
+    showSelected: 2,
     grouped: true
 };
 

@@ -19,7 +19,7 @@ ul {
             margin-left: 10px;
             font-weight: 1000;
             position: relative;
-            top: 2px;
+            top: 0px;
         }
     }
 

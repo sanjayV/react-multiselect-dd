@@ -12,7 +12,7 @@ export default styled.div`
     margin-left: 0px;
     text-align: left;
 
-    .dropdown-inner {
+    .multiselect-main {
         overflow: hidden;
         float: left;
         width: calc(100% - 25px);
@@ -22,14 +22,6 @@ export default styled.div`
         margin: 0;
         border-radius: 5px 5px 0px 0px;
         background: transparent;
-
-        /* background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-        linear-gradient(135deg, gray 50%, transparent 50%),
-        linear-gradient(to right, #ccc, #ccc);
-        background-position: calc(100% - 20px) calc(1em + -2px),
-        calc(100% - 15px) calc(1em + -2px), calc(100% - 2.5em) 0.3em;
-        background-size: 6px 7px, 5px 6px, 1px 1.5em;
-        background-repeat: no-repeat; */
     }
 
     .dropdown-button-arrow {

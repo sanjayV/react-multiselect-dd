@@ -1,7 +1,7 @@
 import React from "react";
-import Container from "./style/Checkbox.style";
+import SelectUi from "./style/Select";
 
-class IndeterminateCheckbox extends React.Component {
+class Select extends React.Component {
     constructor(props) {
         super(props);
 
@@ -36,16 +36,16 @@ class IndeterminateCheckbox extends React.Component {
 
     render() {
         return (
-            <Container checkedColor={this.props.checkedColor}>
+            <SelectUi checkedColor={this.props.checkedColor}>
                 <p>{this.props.label}</p>
                 <input
                     {...this.props}
                     {...this.state.attributes}
                     type="checkbox" />
                 <span />
-            </Container>
+            </SelectUi>
         );
     }
 }
 
-export default IndeterminateCheckbox;
+export default Select;

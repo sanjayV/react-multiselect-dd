@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { size } from "lodash";
-import CustomInput from "./style/TagInput.style";
+import MultiselectOptionUi from "./style/MultiselectOption";
 
-class TagInput extends React.Component {
+class MultiselectOption extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,14 +27,14 @@ class TagInput extends React.Component {
 
     render() {
         const { items, input } = this.state;
-        const { maxLimitOfSelectedItems } = this.props;
+        const { showSelected } = this.props;
         const itemsLength = items.length;
         const MAX_NUMBER_OF_ELEMENTS =
-            itemsLength > maxLimitOfSelectedItems
-                ? maxLimitOfSelectedItems
+            itemsLength > showSelected
+                ? showSelected
                 : itemsLength;
         return (
-            <CustomInput>
+            <MultiselectOptionUi>
                 <ul>
                     {items.slice(0, MAX_NUMBER_OF_ELEMENTS).map((item, i) => (
                         <li key={i} onClick={this.handleRemoveItem(item)}>
@@ -58,7 +58,7 @@ class TagInput extends React.Component {
                         />
                     </li>
                 </ul>
-            </CustomInput>
+            </MultiselectOptionUi>
         );
     }
 
@@ -74,13 +74,13 @@ class TagInput extends React.Component {
     };
 }
 
-TagInput.propTypes = {
-    maxLimitOfSelectedItems: PropTypes.number.isRequired,
+MultiselectOption.propTypes = {
+    showSelected: PropTypes.number.isRequired,
     onChange: PropTypes.func
 };
 
-TagInput.defaultProps = {
+MultiselectOption.defaultProps = {
     onChange: () => { }
 };
 
-export default TagInput;
+export default MultiselectOption;
