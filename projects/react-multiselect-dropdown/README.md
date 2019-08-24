@@ -27,24 +27,24 @@ import Multiselect from "react-multiselect-dd";
 ```js
 const sampleData = [
     {
-        id: 1,
-        title: "First",
+        value: 1,
+        text: "First",
         child: [
             {
-                id: 2,
-                title: "First.1",
+                value: 2,
+                text: "First.1",
                 child: [
                     {
-                        id: 3,
-                        title: "First.1.1"
+                        value: 3,
+                        text: "First.1.1"
                     }
                 ]
             }
         ]
     },
     {
-        id: 4,
-        title: "Second",
+        value: 4,
+        text: "Second",
     },
     ...
 ];

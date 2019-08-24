@@ -3,16 +3,16 @@ import OptionsTreeUi from "./style/OptionsTree";
 import Select from "./Select";
 
 const filterBySearch = (search, node) => {
-    if (search && search !== "") {
-        if (node.title.search(search) > -1) {
+    if (search && search !== "" && node && node.text) {
+        if (node.text.toLowerCase().search(search.toLowerCase()) > -1) {
             return node;
         } else if (node.child != null) {
-            var i;
-            var result = null;
-            for (i = 0; result == null && i < node.child.length; i++) {
-                result = filterBySearch(search, node.child[i]);
+            for (let i = 0; i < node.child.length; i++) {
+                if (filterBySearch(search, node.child[i])) {
+                    return true
+                }
             }
-            return result;
+            return false
         } else {
             return false;
         }
@@ -21,28 +21,28 @@ const filterBySearch = (search, node) => {
     return true;
 };
 
-export const OptionsTree = ({ data, optionHeight, checkedColor, search, selected, onChange }) => (
-    <OptionsTreeUi height={optionHeight}>
+export const OptionsTree = ({ data, optionHeight, checkedColor, search, selected, onChange}) => {
+    return (<OptionsTreeUi height={optionHeight}>
         {data
             .filter(c => filterBySearch(search, c))
             .map(c => {
                 if (c.child) {
                     return (
-                        <li key={c.title}>
+                        <li key={c.text}>
                             {" "}
-                            {selected[c.id] && selected[c.id].status === "indeterminate" ? (
+                            {selected[c.value] && selected[c.value].status === "indeterminate" ? (
                                 <Select
-                                    label={c.title}
+                                    label={c.text}
                                     checkedColor={checkedColor}
                                     indeterminate="true"
                                     onChange={e => onChange(e, c)}
                                 />
                             ) : (
                                     <Select
-                                        label={c.title}
+                                        label={c.text}
                                         checkedColor={checkedColor}
                                         checked={
-                                            !!(selected[c.id] && selected[c.id].status === "true")
+                                            !!(selected[c.value] && selected[c.value].status === "true")
                                         }
                                         onChange={e => onChange(e, c)}
                                     />
@@ -58,25 +58,26 @@ export const OptionsTree = ({ data, optionHeight, checkedColor, search, selected
                     );
                 }
                 return (
-                    <li key={c.title}>
+                    <li key={c.text}>
                         {" "}
-                        {selected[c.id] && selected[c.id].status === "indeterminate" ? (
+                        {selected[c.value] && selected[c.value].status === "indeterminate" ? (
                             <Select
-                                label={c.title}
+                                label={c.text}
                                 checkedColor={checkedColor}
                                 indeterminate="true"
                                 onChange={e => onChange(e, c)}
                             />
                         ) : (
                                 <Select
-                                    label={c.title}
+                                    label={c.text}
                                     checkedColor={checkedColor}
-                                    checked={!!(selected[c.id] && selected[c.id].status === "true")}
+                                    checked={!!(selected[c.value] && selected[c.value].status === "true")}
                                     onChange={e => onChange(e, c)}
                                 />
                             )}
                     </li>
                 );
             })}
-    </OptionsTreeUi>
-);
+    </OptionsTreeUi>)
+}
+

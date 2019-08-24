@@ -3,7 +3,7 @@
 export const updateChildState = (prevState, childs, checked) => {
     if (childs instanceof Array) {
         return childs.reduce((acc, child) => {
-            acc[child.id] = { status: checked, ...child };
+            acc[child.value] = { status: checked, ...child };
             if (child.child) {
                 return updateChildState(acc, child.child, checked);
             }
@@ -12,17 +12,17 @@ export const updateChildState = (prevState, childs, checked) => {
     }
     return {
         ...prevState,
-        [childs.id]: { status: checked, ...childs }
+        [childs.value]: { status: checked, ...childs }
     };
 };
 
-export const findInTree = (id, tree) => {
-    if (tree.id === id) {
+export const findInTree = (value, tree) => {
+    if (tree.value === value) {
         let path = [tree];
         return { result: tree, path };
     } else if (tree.child !== undefined) {
         for (let children of tree.child) {
-            let tmp = findInTree(id, children);
+            let tmp = findInTree(value, children);
             if (tmp && typeof tmp == 'object' && Object.keys(tmp).length) {
                 tmp.path.unshift(tree);
                 return tmp;
@@ -32,31 +32,32 @@ export const findInTree = (id, tree) => {
     }
 };
 
-export const updateTreeState = (searchPath, updatedSelectedState) =>
-    searchPath.path.reverse().reduce((acc, child) => {
+export const updateTreeState = (searchPath, updatedSelectedState) => {
+    return searchPath.path.reverse().reduce((acc, child) => {
         if (child.child) {
-            if (child.child.every(({ id }) => acc[id] && acc[id].status === "true")) {
+            if (child.child.every(({ value }) => acc[value] && acc[value].status === "true")) {
                 return {
                     ...acc,
-                    [child.id]: { status: "true", ...child }
+                    [child.value]: { status: "true", ...child }
                 };
             }
             if (
                 child.child.some(
-                    ({ id }) =>
-                        acc[id] &&
-                        (acc[id].status === "true" || acc[id].status === "indeterminate")
+                    ({ value }) =>
+                        acc[value] &&
+                        (acc[value].status === "true" || acc[value].status === "indeterminate")
                 )
             ) {
                 return {
                     ...acc,
-                    [child.id]: { status: "indeterminate", ...child }
+                    [child.value]: { status: "indeterminate", ...child }
                 };
             }
             return {
                 ...acc,
-                [child.id]: { status: "false", ...child }
+                [child.value]: { status: "false", ...child }
             };
         }
         return acc;
-    }, updatedSelectedState);
+    }, updatedSelectedState)
+};

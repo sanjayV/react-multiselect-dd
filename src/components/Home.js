@@ -8,67 +8,67 @@ const getSelected = selected => {
 const Home = () => {
     const sampleData = [
         {
-            id: 0,
-            title: "First-0 First-0 First-0 First-0"
+            text: "First-0 First-0 First-0 First-0",
+            value: 0
         },
         {
-            id: 1,
-            title: "First",
+            text: "First",
+            value: 1,
             child: [
                 {
-                    id: 2,
-                    title: "First.1",
+                    text: "First.1",
+                    value: 2,
                     child: [
                         {
-                            id: 3,
-                            title: "First.1.1"
+                            text: "First.1.1",
+                            value: 3
                         }
                     ]
                 }
             ]
         },
         {
-            id: 4,
-            title: "Second",
+            text: "Second",
+            value: 4,
             child: [
                 {
-                    id: 5,
-                    title: "Second.1",
+                    text: "Second.1",
+                    value: 5,
                     child: [
                         {
-                            id: 6,
-                            title: "Second.1.1"
+                            text: "Second.1.1",
+                            value: 6
                         }
                     ]
                 },
                 {
-                    id: 7,
-                    title: "Second.2",
+                    text: "Second.2",
+                    value: 7,
                     child: [
                         {
-                            id: 8,
-                            title: "Second.2.1"
+                            text: "Second.2.1",
+                            value: 8
                         },
                         {
-                            id: 9,
-                            title: "Second.2.2"
+                            text: "Second.2.2",
+                            value: 9
                         }
                     ]
                 }
             ]
         },
         {
-            id: 10,
-            title: "First-10"
+            text: "First-10",
+            value: 10
         },
         {
-            id: 11,
-            title: "First-11"
+            text: "First-11",
+            value: 11
         },
         {
-            id: 12,
-            title: "First-12"
-        },
+            text: "First-12",
+            value: 12
+        }
     ];
 
     return (

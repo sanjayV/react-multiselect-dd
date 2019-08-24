@@ -38,7 +38,7 @@ class MultiselectOption extends React.Component {
                 <ul>
                     {items.slice(0, MAX_NUMBER_OF_ELEMENTS).map((item, i) => (
                         <li key={i} onClick={this.handleRemoveItem(item)}>
-                            {item.title}
+                            {item.text}
                             <span>
                                 <img
                                     alt="Icon"

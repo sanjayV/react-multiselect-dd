@@ -45,7 +45,7 @@ class Multiselect extends React.Component {
         const { selectedState } = this.state;
         const { data, grouped } = this.props;
 
-        selectedState[parseInt(d.id)] = {
+        selectedState[parseInt(d.value)] = {
             status: checked.toString(),
             ...d
         };
@@ -53,7 +53,7 @@ class Multiselect extends React.Component {
 
         if (grouped) {
             const searchPath = data.reduce((acc, child) => {
-                const findResult = findInTree(parseInt(d.id), child);
+                const findResult = findInTree(parseInt(d.value), child);
                 if (findResult && typeof findResult == 'object' && Object.keys(findResult).length) {
                     return findResult;
                 }
@@ -109,7 +109,7 @@ class Multiselect extends React.Component {
                 (!grouped && val.status === "true") ||
                 (grouped && val.status === "true" && !val.hasOwnProperty("child"))
             )
-            .reduce((arr, [key, val]) => [...arr, { id: key, ...val }], []);
+            .reduce((arr, [key, val]) => [...arr, { value: key, ...val }], []);
         return (
             <React.Fragment>
                 <MultiselectUi
